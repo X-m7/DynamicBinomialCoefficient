@@ -28,7 +28,7 @@ public class DynamicBinomialCoefficient {
 		long[] factorialResults = new long[n + 1];
 		factorialResults[0] = 1; //0! = 1
 		for (int counter = 1; counter <= n; counter++) { //calculate n! and all before
-			factorialResults[counter] = (long) counter * factorialResults[counter - 1];
+			factorialResults[counter] = counter * factorialResults[counter - 1];
 		}
 		return factorialResults[n] / (factorialResults[k] * factorialResults[n - k]);
 	}
