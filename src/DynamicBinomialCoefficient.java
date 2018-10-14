@@ -21,16 +21,24 @@ public class DynamicBinomialCoefficient {
 		}
 	}
 	
+	/*
+	 * C(n,k) = C(n-1, k-1) + C(n-1, k)
+	 */
 	public static long c(int n, int k) {
-		if (n == 0) {
-			return 0L;
+		long[][] array = new long[n+1][k+1];
+		array[0][0] = 1;
+		for (int counter = 1; counter <= k; counter++) { //initialize 1st row (c(0,x) for x > 0 is 0)
+			array[0][counter] = 0;
 		}
-		long[] factorialResults = new long[n + 1];
-		factorialResults[0] = 1; //0! = 1
-		for (int counter = 1; counter <= n; counter++) { //calculate n! and all before
-			factorialResults[counter] = counter * factorialResults[counter - 1];
+		for (int counter = 1; counter <= n; counter++) { //initialize 1st column (c(x,0) for x > 0 is 1)
+			array[counter][0] = 1;
 		}
-		return factorialResults[n] / (factorialResults[k] * factorialResults[n - k]);
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= k; j++) { //initialize 1st row (c(0,x) for x > 0 is 0)
+				array[i][j] = array[i-1][j-1] + array[i-1][j];
+			}
+		}
+		return array[n][k];
 	}
 
 }
