@@ -16,6 +16,8 @@ public class DynamicBinomialCoefficient {
 			System.out.println(c(n, k));
 		} catch (NumberFormatException e) {
 			System.out.println("Invalid input");
+		} catch (ArithmeticException e) {
+			System.out.println("Overflow detected");
 		} finally {
 			input.close();
 		}
@@ -35,7 +37,7 @@ public class DynamicBinomialCoefficient {
 		}
 		for (int i = 1; i <= n; i++) {
 			for (int j = 1; j <= k; j++) { //initialize 1st row (c(0,x) for x > 0 is 0)
-				array[i][j] = array[i-1][j-1] + array[i-1][j];
+				array[i][j] = Math.addExact(array[i-1][j-1], array[i-1][j]);
 			}
 		}
 		return array[n][k];
